@@ -205,7 +205,7 @@ hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令
 https://zhuanlan.zhihu.com/p/22405775
 
 # 四 TravisCI
-Travis CI 是目前新兴的开源持续集成构建项目，它与jenkins的很明显的特别在于采用yaml格式，同时它是在在线的服务，不像jenkins需要你本地搭建服务器，目前大多数的github项目都已经移入到Travis CI的构建队列中。
+[Travis CI](https://www.travis-ci.org/wuhaosky/wuhaosky.github.io) 是目前新兴的开源持续集成构建项目，它与jenkins的很明显的特别在于采用yaml格式，同时它是在在线的服务，不像jenkins需要你本地搭建服务器，目前大多数的github项目都已经移入到Travis CI的构建队列中。
 
 每次写完博客git push到github，然后Travis自动构建，构建完成后自动推送到Github Page服务上。生成后的静态资源和博客的源文件存放到一个仓库上，使用了不同的分支来区分它们。master：博客的静态文件，也就是hexo生成后的HTML等文件，因为要使用Github Page服务，所以它规定的网页文件必须是在master分支；source分支：存放博客源码。并将source分支设为默认分支。
 ![](https://p1.meituan.net/education/5052a70c2c6ac4b356e55daf71e7891e243712.png)
