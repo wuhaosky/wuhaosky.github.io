@@ -56,8 +56,10 @@ The key's randomart image is:
 
 # 二 Github Page
 ## 2.1 创建Github仓库
-创建Github仓库，仓库名必须是用户名.github.io。
-![](https://p0.meituan.net/education/2de0dfadd379d8bc89f54f369506d8c016293.png)
+创建Github仓库，仓库名必须是“用户名.github.io”。
+
+<img width=355 height=59 src="https://p0.meituan.net/education/2de0dfadd379d8bc89f54f369506d8c016293.png">
+
 ## 2.2 使用Github Page服务
 Github Page规定使用仓库的master分支。
 ![](https://p0.meituan.net/education/0d6b05f068f4f8ac0fccd2cd996a000c242229.png)
@@ -184,7 +186,8 @@ npm install hexo-deployer-git --save
 ``` bash
 hexo deploy
 ```
-
+部署成功后，就可以访问页面了。
+![](https://p0.meituan.net/education/c83aa8fdd088734c211b9af353b193951195484.png)
 
 ## 3.3 Hexo命令简写
 hexo n "我的博客" == hexo new "我的博客" #新建文章
@@ -198,4 +201,57 @@ hexo server -p 5000 #更改端口
 hexo server -i 192.168.1.1 #自定义 IP
 hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令
 
+参考文章：手把手教从零开始在GitHub上使用Hexo搭建博客教程
+https://zhuanlan.zhihu.com/p/22405775
 
+# 四 TravisCI
+Travis CI 是目前新兴的开源持续集成构建项目，它与jenkins的很明显的特别在于采用yaml格式，同时它是在在线的服务，不像jenkins需要你本地搭建服务器，目前大多数的github项目都已经移入到Travis CI的构建队列中。
+
+每次写完博客git push到github，然后Travis自动构建，构建完成后自动推送到Github Page服务上。生成后的静态资源和博客的源文件存放到一个仓库上，使用了不同的分支来区分它们。master：博客的静态文件，也就是hexo生成后的HTML等文件，因为要使用Github Page服务，所以它规定的网页文件必须是在master分支；source分支：存放博客源码。并将source分支设为默认分支。
+![](https://p1.meituan.net/education/5052a70c2c6ac4b356e55daf71e7891e243712.png)
+
+## 4.1 github生成access token
+![](https://p1.meituan.net/education/5c2ef0208f464105e9ea0e21a2506d80175073.png)
+
+## 4.2 TravisCI构建GitHub项目配置
+![](https://p1.meituan.net/education/bc9d47432427386ce87ce682ad847677520440.png)
+## 4.3 在项目根目录增加并配置.travis.yml
+``` bash
+language: node_js
+node_js: stable
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+
+#before_script:
+ # - npm install -g gulp
+
+script:
+  - hexo g
+
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "wuhaosky"
+  - git config user.email "wuhaosky@163.com"
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${Github_Token}@${GH_REF}" master:master
+# E: Build LifeCycle
+
+branches:
+  only:
+    - source
+env:
+ global:
+   - GH_REF: github.com/wuhaosky/wuhaosky.github.io.git
+
+```
+## 4.4 push代码，travis自动构建并部署
+![](https://p0.meituan.net/education/1f876e2738207d1b6ec3b512daf0f6ca735779.png)
+
+
+参考文章：手把手教你使用Travis CI自动部署你的Hexo博客到Github上
+http://blog.csdn.net/woblog/article/details/51319364
