@@ -7,6 +7,8 @@ title: 使用github page + hexo + travis搭建博客
 * hexo是台湾人基于nodejs开发的，对中文支持比较友好。
 * Travis可以自动构建和部署。
 
+</br>
+
 # 一 配置SSH KEY
 ## 1.1 为不同网站应用不同的SSH KE
 一般公司内部会有私有gitlab，为避免身份冲突，我们可以为不同网站应用不同的SSH KEY。
@@ -50,9 +52,9 @@ The key's randomart image is:
 输入文件名为id_rsa_github，按回车则会自动生成私钥和公钥：id_rsa_github、id_rsa_github.pub。后面跟着输入密码和确认密码。
 再把公钥id_rsa_github.pub中的内容添加至github上面。
 
-
 参考文章：一台电脑配置多个SSH KEY，多个用户身份http://lalala.lol/2017/02/21/a-computer-with-multiple-ssh-keys/
 
+</br>
 
 # 二 Github Page
 ## 2.1 创建Github仓库
@@ -63,6 +65,8 @@ The key's randomart image is:
 ## 2.2 使用Github Page服务
 Github Page规定使用仓库的master分支。
 ![](https://p0.meituan.net/education/0d6b05f068f4f8ac0fccd2cd996a000c242229.png)
+
+</br>
 
 # 三 HEXO
 [Hexo](https://hexo.io/zh-cn/)是快速、简洁、高效的博客框架。
@@ -204,6 +208,8 @@ hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令
 参考文章：手把手教从零开始在GitHub上使用Hexo搭建博客教程
 https://zhuanlan.zhihu.com/p/22405775
 
+</br>
+
 # 四 TravisCI
 [Travis CI](https://www.travis-ci.org/wuhaosky/wuhaosky.github.io) 是目前新兴的开源持续集成构建项目，它与jenkins的很明显的特别在于采用yaml格式，同时它是在在线的服务，不像jenkins需要你本地搭建服务器，目前大多数的github项目都已经移入到Travis CI的构建队列中。
 
@@ -255,3 +261,17 @@ env:
 
 参考文章：手把手教你使用Travis CI自动部署你的Hexo博客到Github上
 http://blog.csdn.net/woblog/article/details/51319364
+
+</br>
+
+# 五 自定义域名
+## 5.1 阿里云购买域名
+![](https://p1.meituan.net/education/4f507199a1fb60dfa5b06472fabc28a571172.png)
+
+## 5.2 阿里云域名解析配置A字段
+A字段决定域名的请求打到哪台机器上
+![](https://p0.meituan.net/education/15bc272d5e5151c28e308a2ce67a8c8e48397.png)
+
+## 5.3 博客源码source目录下，新建CNAME文件
+CNAME的作用，是将打到GitHub机器上的请求路由到自己的仓库。
+<img width=525 height=419 src="https://p0.meituan.net/education/e51f01afe16f073394b762c51c439329102662.png">
