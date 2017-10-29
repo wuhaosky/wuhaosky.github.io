@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="github page服务是免费的，提供300M的空间，可以托管静态网页。 hexo是台湾人基于nodejs开发的，对中文支持比较友好。 Travis可以自动构建和部署。   一 配置SSH KEY1.1 为不同网站应用不同的SSH KE一般公司内部会有私有gitlab，为避免身份冲突，我们可以为不同网站应用不同的SSH KEY。在 ~/.ssh 目录下创建 config 文件：输入以下信息，这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用github page + hexo + travis搭建博客">
+<meta property="og:url" content="wuhaosky.github.io/2017/10/29/github page + hexo + travis/index.html">
+<meta property="og:site_name" content="wuhao’s blog">
+<meta property="og:description" content="github page服务是免费的，提供300M的空间，可以托管静态网页。 hexo是台湾人基于nodejs开发的，对中文支持比较友好。 Travis可以自动构建和部署。   一 配置SSH KEY1.1 为不同网站应用不同的SSH KE一般公司内部会有私有gitlab，为避免身份冲突，我们可以为不同网站应用不同的SSH KEY。在 ~/.ssh 目录下创建 config 文件：输入以下信息，这">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://p0.meituan.net/education/2de0dfadd379d8bc89f54f369506d8c016293.png">
+<meta property="og:image" content="https://p0.meituan.net/education/0d6b05f068f4f8ac0fccd2cd996a000c242229.png">
+<meta property="og:image" content="https://p0.meituan.net/education/c83aa8fdd088734c211b9af353b193951195484.png">
+<meta property="og:image" content="https://p1.meituan.net/education/5052a70c2c6ac4b356e55daf71e7891e243712.png">
+<meta property="og:image" content="https://p1.meituan.net/education/5c2ef0208f464105e9ea0e21a2506d80175073.png">
+<meta property="og:image" content="https://p1.meituan.net/education/bc9d47432427386ce87ce682ad847677520440.png">
+<meta property="og:image" content="https://p0.meituan.net/education/1f876e2738207d1b6ec3b512daf0f6ca735779.png">
+<meta property="og:image" content="https://p1.meituan.net/education/4f507199a1fb60dfa5b06472fabc28a571172.png">
+<meta property="og:image" content="https://p0.meituan.net/education/15bc272d5e5151c28e308a2ce67a8c8e48397.png">
+<meta property="og:image" content="https://p0.meituan.net/education/231a752adb57d81ec07fe1188cd5b20536800.png">
+<meta property="og:image" content="https://p0.meituan.net/education/e51f01afe16f073394b762c51c439329102662.png">
+<meta property="og:updated_time" content="2017-10-29T13:26:12.018Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用github page + hexo + travis搭建博客">
+<meta name="twitter:description" content="github page服务是免费的，提供300M的空间，可以托管静态网页。 hexo是台湾人基于nodejs开发的，对中文支持比较友好。 Travis可以自动构建和部署。   一 配置SSH KEY1.1 为不同网站应用不同的SSH KE一般公司内部会有私有gitlab，为避免身份冲突，我们可以为不同网站应用不同的SSH KEY。在 ~/.ssh 目录下创建 config 文件：输入以下信息，这">
+<meta name="twitter:image" content="https://p0.meituan.net/education/2de0dfadd379d8bc89f54f369506d8c016293.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="wuhaosky.github.io/2017/10/29/github page + hexo + travis/"/>
+
+
+
+
+
+  <title>使用github page + hexo + travis搭建博客 | wuhao’s blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wuhao’s blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="wuhaosky.github.io/2017/10/29/github page + hexo + travis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuhaosky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://p1.meituan.net/education/7987ec6f1db89fec95fd4b1de0ea7be8340057.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuhao’s blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用github page + hexo + travis搭建博客</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T13:26:12+00:00">
+                2017-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>github page服务是免费的，提供300M的空间，可以托管静态网页。</li>
+<li>hexo是台湾人基于nodejs开发的，对中文支持比较友好。</li>
+<li>Travis可以自动构建和部署。</li>
+</ul>
+<p><br></p>
+<h1 id="一-配置SSH-KEY"><a href="#一-配置SSH-KEY" class="headerlink" title="一 配置SSH KEY"></a>一 配置SSH KEY</h1><h2 id="1-1-为不同网站应用不同的SSH-KE"><a href="#1-1-为不同网站应用不同的SSH-KE" class="headerlink" title="1.1 为不同网站应用不同的SSH KE"></a>1.1 为不同网站应用不同的SSH KE</h2><p>一般公司内部会有私有gitlab，为避免身份冲突，我们可以为不同网站应用不同的SSH KEY。<br>在 ~/.ssh 目录下创建 config 文件：<br>输入以下信息，这样github和oschina就可以使用两个身份。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Host github.com</div><div class="line">    HostName github.com</div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa_github</div><div class="line">Host git.oschina.net</div><div class="line">    HostName git.oschina.net</div><div class="line">    User git</div><div class="line">    IdentityFile ~/.ssh/id_rsa</div></pre></td></tr></table></figure></p>
+<h2 id="1-2-生成SSH-KEY"><a href="#1-2-生成SSH-KEY" class="headerlink" title="1.2 生成SSH KEY"></a>1.2 生成SSH KEY</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C <span class="string">"wuhaosky@163.com"</span></div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/Users/wuhao/.ssh/id_rsa): /Users/wuhao/.ssh/id_rsa_github</div><div class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</div><div class="line">Enter same passphrase again:</div><div class="line">Your identification has been saved <span class="keyword">in</span> /Users/wuhao/.ssh/id_rsa_github.</div><div class="line">Your public key has been saved <span class="keyword">in</span> /Users/wuhao/.ssh/id_rsa_github.pub.</div><div class="line">The key fingerprint is:</div><div class="line">SHA256:xxxxxxxxxakKfBQglu8wqYvLGq0CXEFZxxxxxxxxxx wuhaosky@163.com</div><div class="line">The key<span class="string">'s randomart image is:</span></div><div class="line"><span class="string">+---[RSA 2048]----+</span></div><div class="line"><span class="string">|  +@EB..  +.     |</span></div><div class="line"><span class="string">| o =*.+..+ .     |</span></div><div class="line"><span class="string">|  *  . ++ +      |</span></div><div class="line"><span class="string">|o+ o  .= B       |</span></div><div class="line"><span class="string">|+o. o o S =      |</span></div><div class="line"><span class="string">| o++     o .     |</span></div><div class="line"><span class="string">|.oo              |</span></div><div class="line"><span class="string">|o                |</span></div><div class="line"><span class="string">|+                |</span></div><div class="line"><span class="string">+----[SHA256]-----+</span></div></pre></td></tr></table></figure>
+<p>输入文件名为id_rsa_github，按回车则会自动生成私钥和公钥：id_rsa_github、id_rsa_github.pub。后面跟着输入密码和确认密码。<br>再把公钥id_rsa_github.pub中的内容添加至github上面。</p>
+<p>参考文章：一台电脑配置多个SSH KEY，多个用户身份<a href="http://lalala.lol/2017/02/21/a-computer-with-multiple-ssh-keys/" target="_blank" rel="external">http://lalala.lol/2017/02/21/a-computer-with-multiple-ssh-keys/</a></p>
+<p><br></p>
+<h1 id="二-Github-Page"><a href="#二-Github-Page" class="headerlink" title="二 Github Page"></a>二 Github Page</h1><h2 id="2-1-创建Github仓库"><a href="#2-1-创建Github仓库" class="headerlink" title="2.1 创建Github仓库"></a>2.1 创建Github仓库</h2><p>创建Github仓库，仓库名必须是“用户名.github.io”。</p>
+<p><img width="355" height="59" src="https://p0.meituan.net/education/2de0dfadd379d8bc89f54f369506d8c016293.png"></p>
+<h2 id="2-2-使用Github-Page服务"><a href="#2-2-使用Github-Page服务" class="headerlink" title="2.2 使用Github Page服务"></a>2.2 使用Github Page服务</h2><p>Github Page规定使用仓库的master分支。<br><img src="https://p0.meituan.net/education/0d6b05f068f4f8ac0fccd2cd996a000c242229.png" alt=""></p>
+<p><br></p>
+<h1 id="三-HEXO"><a href="#三-HEXO" class="headerlink" title="三 HEXO"></a>三 HEXO</h1><p><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a>是快速、简洁、高效的博客框架。</p>
+<h2 id="3-1-新建博客"><a href="#3-1-新建博客" class="headerlink" title="3.1 新建博客"></a>3.1 新建博客</h2><h3 id="3-1-1-新建文章："><a href="#3-1-1-新建文章：" class="headerlink" title="3.1.1 新建文章："></a>3.1.1 新建文章：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &lt;title&gt;</div></pre></td></tr></table></figure>
+<p>此时在source文件夹下_posts文件夹中便会多出一个文档”title.md”。<br>如果要删除，直接在此文件夹下删除对应的文件即可。</p>
+<h3 id="3-1-2-生成静态页面"><a href="#3-1-2-生成静态页面" class="headerlink" title="3.1.2 生成静态页面"></a>3.1.2 生成静态页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure>
+<p>生成的静态内容在public文件夹内。</p>
+<h3 id="3-1-3-清除生成内容"><a href="#3-1-3-清除生成内容" class="headerlink" title="3.1.3 清除生成内容"></a>3.1.3 清除生成内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean</div></pre></td></tr></table></figure>
+<p>执行此操作会删除public文件夹中的内容。</p>
+<h3 id="3-1-4-部署Hexo"><a href="#3-1-4-部署Hexo" class="headerlink" title="3.1.4 部署Hexo"></a>3.1.4 部署Hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+<p>该操作会将hexo生成的静态内容部署到配置的仓库中，请看下面介绍。</p>
+<h2 id="3-2-部署Hexo"><a href="#3-2-部署Hexo" class="headerlink" title="3.2 部署Hexo"></a>3.2 部署Hexo</h2><h3 id="3-2-1-Hexo配置文件-config-yml"><a href="#3-2-1-Hexo配置文件-config-yml" class="headerlink" title="3.2.1 Hexo配置文件_config.yml"></a>3.2.1 Hexo配置文件_config.yml</h3><p>编辑下面内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Hexo Configuration</span></div><div class="line"><span class="comment">## Docs: https://hexo.io/docs/configuration.html</span></div><div class="line"><span class="comment">## Source: https://github.com/hexojs/hexo/</span></div><div class="line"></div><div class="line"><span class="comment"># Site</span></div><div class="line">title: Hexo</div><div class="line">subtitle:</div><div class="line">description:</div><div class="line">author: wuhaosky</div><div class="line">language:</div><div class="line">timezone:</div><div class="line"></div><div class="line"><span class="comment"># URL</span></div><div class="line"><span class="comment">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></div><div class="line">url: wuhaosky.github.io <span class="comment">#网站的地址</span></div><div class="line">root: /</div><div class="line">permalink: :year/:month/:day/:title/</div><div class="line">permalink_defaults:</div><div class="line"></div><div class="line"><span class="comment"># Directory</span></div><div class="line">source_dir: <span class="built_in">source</span></div><div class="line">public_dir: public</div><div class="line">tag_dir: tags</div><div class="line">archive_dir: archives</div><div class="line">category_dir: categories</div><div class="line">code_dir: downloads/code</div><div class="line">i18n_dir: :lang</div><div class="line">skip_render:</div><div class="line"></div><div class="line"><span class="comment"># Writing</span></div><div class="line">new_post_name: :title.md <span class="comment"># File name of new posts</span></div><div class="line">default_layout: post</div><div class="line">titlecase: <span class="literal">false</span> <span class="comment"># Transform title into titlecase</span></div><div class="line">external_link: <span class="literal">true</span> <span class="comment"># Open external links in new tab</span></div><div class="line">filename_case: 0</div><div class="line">render_drafts: <span class="literal">false</span></div><div class="line">post_asset_folder: <span class="literal">false</span></div><div class="line">relative_link: <span class="literal">false</span></div><div class="line">future: <span class="literal">true</span></div><div class="line">highlight:</div><div class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></div><div class="line">  line_number: <span class="literal">true</span></div><div class="line">  auto_detect: <span class="literal">false</span></div><div class="line">  tab_replace:</div><div class="line">  </div><div class="line"><span class="comment"># Home page setting</span></div><div class="line"><span class="comment"># path: Root path for your blogs index page. (default = '')</span></div><div class="line"><span class="comment"># per_page: Posts displayed per page. (0 = disable pagination)</span></div><div class="line"><span class="comment"># order_by: Posts order. (Order by date descending by default)</span></div><div class="line">index_generator:</div><div class="line">  path: <span class="string">''</span></div><div class="line">  per_page: 10</div><div class="line">  order_by: -date</div><div class="line">  </div><div class="line"><span class="comment"># Category &amp; Tag</span></div><div class="line">default_category: uncategorized</div><div class="line">category_map:</div><div class="line">tag_map:</div><div class="line"></div><div class="line"><span class="comment"># Date / Time format</span></div><div class="line"><span class="comment">## Hexo uses Moment.js to parse and display date</span></div><div class="line"><span class="comment">## You can customize the date format as defined in</span></div><div class="line"><span class="comment">## http://momentjs.com/docs/#/displaying/format/</span></div><div class="line">date_format: YYYY-MM-DD</div><div class="line">time_format: HH:mm:ss</div><div class="line"></div><div class="line"><span class="comment"># Pagination</span></div><div class="line"><span class="comment">## Set per_page to 0 to disable pagination</span></div><div class="line">per_page: 10</div><div class="line">pagination_dir: page</div><div class="line"></div><div class="line"><span class="comment"># Extensions</span></div><div class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></div><div class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></div><div class="line">theme: landscape</div><div class="line"></div><div class="line"><span class="comment"># Deployment</span></div><div class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></div><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repo: git@github.com:wuhaosky/wuhaosky.github.io.git <span class="comment">#github仓库地址</span></div><div class="line">  branch: master <span class="comment"># github分支</span></div></pre></td></tr></table></figure></p>
+<h3 id="3-2-2-安装git插件"><a href="#3-2-2-安装git插件" class="headerlink" title="3.2.2 安装git插件"></a>3.2.2 安装git插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<h3 id="3-2-3-部署"><a href="#3-2-3-部署" class="headerlink" title="3.2.3 部署"></a>3.2.3 部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy</div></pre></td></tr></table></figure>
+<p>部署成功后，就可以访问页面了。<br><img src="https://p0.meituan.net/education/c83aa8fdd088734c211b9af353b193951195484.png" alt=""></p>
+<h2 id="3-3-Hexo命令简写"><a href="#3-3-Hexo命令简写" class="headerlink" title="3.3 Hexo命令简写"></a>3.3 Hexo命令简写</h2><p>hexo n “我的博客” == hexo new “我的博客” #新建文章<br>hexo g == hexo generate #生成<br>hexo s == hexo server #启动服务预览<br>hexo d == hexo deploy #部署</p>
+<p>hexo server #Hexo会监视文件变动并自动更新，无须重启服务器<br>hexo server -s #静态模式<br>hexo server -p 5000 #更改端口<br>hexo server -i 192.168.1.1 #自定义 IP<br>hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令</p>
+<p>参考文章：手把手教从零开始在GitHub上使用Hexo搭建博客教程<br><a href="https://zhuanlan.zhihu.com/p/22405775" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/22405775</a></p>
+<p><br></p>
+<h1 id="四-TravisCI"><a href="#四-TravisCI" class="headerlink" title="四 TravisCI"></a>四 TravisCI</h1><p><a href="https://www.travis-ci.org/wuhaosky/wuhaosky.github.io" target="_blank" rel="external">Travis CI</a> 是目前新兴的开源持续集成构建项目，它与jenkins的很明显的特别在于采用yaml格式，同时它是在在线的服务，不像jenkins需要你本地搭建服务器，目前大多数的github项目都已经移入到Travis CI的构建队列中。</p>
+<p>每次写完博客git push到github，然后Travis自动构建，构建完成后自动推送到Github Page服务上。生成后的静态资源和博客的源文件存放到一个仓库上，使用了不同的分支来区分它们。master：博客的静态文件，也就是hexo生成后的HTML等文件，因为要使用Github Page服务，所以它规定的网页文件必须是在master分支；source分支：存放博客源码。并将source分支设为默认分支。<br><img src="https://p1.meituan.net/education/5052a70c2c6ac4b356e55daf71e7891e243712.png" alt=""></p>
+<h2 id="4-1-github生成access-token"><a href="#4-1-github生成access-token" class="headerlink" title="4.1 github生成access token"></a>4.1 github生成access token</h2><p><img src="https://p1.meituan.net/education/5c2ef0208f464105e9ea0e21a2506d80175073.png" alt=""></p>
+<h2 id="4-2-TravisCI构建GitHub项目配置"><a href="#4-2-TravisCI构建GitHub项目配置" class="headerlink" title="4.2 TravisCI构建GitHub项目配置"></a>4.2 TravisCI构建GitHub项目配置</h2><p><img src="https://p1.meituan.net/education/bc9d47432427386ce87ce682ad847677520440.png" alt=""></p>
+<h2 id="4-3-在项目根目录增加并配置-travis-yml"><a href="#4-3-在项目根目录增加并配置-travis-yml" class="headerlink" title="4.3 在项目根目录增加并配置.travis.yml"></a>4.3 在项目根目录增加并配置.travis.yml</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">language: node_js</div><div class="line">node_js: stable</div><div class="line"></div><div class="line"><span class="comment"># S: Build Lifecycle</span></div><div class="line">install:</div><div class="line">  - npm install</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#before_script:</span></div><div class="line"> <span class="comment"># - npm install -g gulp</span></div><div class="line"></div><div class="line">script:</div><div class="line">  - hexo g</div><div class="line"></div><div class="line">after_script:</div><div class="line">  - <span class="built_in">cd</span> ./public</div><div class="line">  - git init</div><div class="line">  - git config user.name <span class="string">"wuhaosky"</span></div><div class="line">  - git config user.email <span class="string">"wuhaosky@163.com"</span></div><div class="line">  - git add .</div><div class="line">  - git commit -m <span class="string">"Update docs"</span></div><div class="line">  - git push --force --quiet <span class="string">"https://<span class="variable">$&#123;Github_Token&#125;</span>@<span class="variable">$&#123;GH_REF&#125;</span>"</span> master:master</div><div class="line"><span class="comment"># E: Build LifeCycle</span></div><div class="line"></div><div class="line">branches:</div><div class="line">  only:</div><div class="line">    - <span class="built_in">source</span></div><div class="line">env:</div><div class="line"> global:</div><div class="line">   - GH_REF: github.com/wuhaosky/wuhaosky.github.io.git</div></pre></td></tr></table></figure>
+<h2 id="4-4-push代码，travis自动构建并部署"><a href="#4-4-push代码，travis自动构建并部署" class="headerlink" title="4.4 push代码，travis自动构建并部署"></a>4.4 push代码，travis自动构建并部署</h2><p><img src="https://p0.meituan.net/education/1f876e2738207d1b6ec3b512daf0f6ca735779.png" alt=""></p>
+<p>参考文章：手把手教你使用Travis CI自动部署你的Hexo博客到Github上<br><a href="http://blog.csdn.net/woblog/article/details/51319364" target="_blank" rel="external">http://blog.csdn.net/woblog/article/details/51319364</a></p>
+<p><br></p>
+<h1 id="五-自定义域名"><a href="#五-自定义域名" class="headerlink" title="五 自定义域名"></a>五 自定义域名</h1><h2 id="5-1-阿里云购买域名"><a href="#5-1-阿里云购买域名" class="headerlink" title="5.1 阿里云购买域名"></a>5.1 阿里云购买域名</h2><p><img src="https://p1.meituan.net/education/4f507199a1fb60dfa5b06472fabc28a571172.png" alt=""></p>
+<h2 id="5-2-阿里云域名解析配置A字段"><a href="#5-2-阿里云域名解析配置A字段" class="headerlink" title="5.2 阿里云域名解析配置A字段"></a>5.2 阿里云域名解析配置A字段</h2><p>A字段决定域名的请求打到哪台机器上<br><img src="https://p0.meituan.net/education/15bc272d5e5151c28e308a2ce67a8c8e48397.png" alt=""></p>
+<p>或者使用CNAME把一个域名映射到另一个域名，GitHub推荐这种方式<br><img src="https://p0.meituan.net/education/231a752adb57d81ec07fe1188cd5b20536800.png" alt=""></p>
+<h2 id="5-3-博客源码source目录下，新建CNAME文件"><a href="#5-3-博客源码source目录下，新建CNAME文件" class="headerlink" title="5.3 博客源码source目录下，新建CNAME文件"></a>5.3 博客源码source目录下，新建CNAME文件</h2><p>CNAME的作用</p>
+<ul>
+<li>将打到GitHub机器上的请求路由到自己的仓库；</li>
+<li>当访问<code>wuhaosky.github.io</code>的时候会重定向到<code>blog.wuhaosky.com</code>。</li>
+</ul>
+<p><img width="525" height="419" src="https://p0.meituan.net/education/e51f01afe16f073394b762c51c439329102662.png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/29/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://p1.meituan.net/education/7987ec6f1db89fec95fd4b1de0ea7be8340057.jpg"
+                alt="wuhaosky" />
+            
+              <p class="site-author-name" itemprop="name">wuhaosky</p>
+              <p class="site-description motion-element" itemprop="description">技术的价值在于解决业务的痛点</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-配置SSH-KEY"><span class="nav-number">1.</span> <span class="nav-text">一 配置SSH KEY</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-为不同网站应用不同的SSH-KE"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 为不同网站应用不同的SSH KE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-生成SSH-KEY"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 生成SSH KEY</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-Github-Page"><span class="nav-number">2.</span> <span class="nav-text">二 Github Page</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-创建Github仓库"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 创建Github仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-使用Github-Page服务"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 使用Github Page服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-HEXO"><span class="nav-number">3.</span> <span class="nav-text">三 HEXO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-新建博客"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 新建博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-新建文章："><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 新建文章：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-生成静态页面"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 生成静态页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-清除生成内容"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 清除生成内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-部署Hexo"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4 部署Hexo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-部署Hexo"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 部署Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-Hexo配置文件-config-yml"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 Hexo配置文件_config.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-安装git插件"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 安装git插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-部署"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3 部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Hexo命令简写"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 Hexo命令简写</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-TravisCI"><span class="nav-number">4.</span> <span class="nav-text">四 TravisCI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-github生成access-token"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 github生成access token</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-TravisCI构建GitHub项目配置"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 TravisCI构建GitHub项目配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-在项目根目录增加并配置-travis-yml"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 在项目根目录增加并配置.travis.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-push代码，travis自动构建并部署"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 push代码，travis自动构建并部署</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-自定义域名"><span class="nav-number">5.</span> <span class="nav-text">五 自定义域名</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-阿里云购买域名"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 阿里云购买域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-阿里云域名解析配置A字段"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 阿里云域名解析配置A字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-博客源码source目录下，新建CNAME文件"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 博客源码source目录下，新建CNAME文件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wuhaosky</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
