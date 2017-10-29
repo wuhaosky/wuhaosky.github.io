@@ -272,6 +272,12 @@ http://blog.csdn.net/woblog/article/details/51319364
 A字段决定域名的请求打到哪台机器上
 ![](https://p0.meituan.net/education/15bc272d5e5151c28e308a2ce67a8c8e48397.png)
 
+或者使用CNAME把一个域名映射到另一个域名，GitHub推荐这种方式
+![](https://p0.meituan.net/education/231a752adb57d81ec07fe1188cd5b20536800.png)
+
 ## 5.3 博客源码source目录下，新建CNAME文件
-CNAME的作用，是将打到GitHub机器上的请求路由到自己的仓库。
+CNAME的作用
+* 将打到GitHub机器上的请求路由到自己的仓库；
+* 当访问`wuhaosky.github.io`的时候会重定向到`blog.wuhaosky.com`。
+
 <img width=525 height=419 src="https://p0.meituan.net/education/e51f01afe16f073394b762c51c439329102662.png">
